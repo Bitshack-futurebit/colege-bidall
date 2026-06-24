@@ -28,8 +28,8 @@
                     </a>
                     @else
                     <a href="/" class="flex items-center gap-2">
-                        <img src="/images/gavel-logo.svg" alt="BidAll" class="h-12 w-12">
-                        <span class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{ config('branding.name') }}</span>
+                        <img src="{{ config('branding.logo.default') }}" alt="{{ config('branding.name') }}" class="h-12 w-12 object-contain">
+                        <span class="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400 leading-tight">{{ config('branding.name') }}</span>
                     </a>
                     @endif
                 </div>

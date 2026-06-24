@@ -88,20 +88,21 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @if(($whiteLabel ?? null)?->isActive())
+    {{-- Brand palette — generated from config('branding.colors.primary') so the whole
+         primary-* Tailwind scale re-themes at runtime (no asset rebuild). A live
+         white-label context, if ever active, still overrides per-auctioneer. --}}
+    @php
+        $brandPrimary = ($whiteLabel ?? null)?->isActive()
+            ? $whiteLabel->primaryColor()
+            : config('branding.colors.primary', '#22c55e');
+    @endphp
     <style>
         :root {
-            @foreach(\App\Helpers\ColorHelper::generatePalette($whiteLabel->primaryColor()) as $shade => $rgb)
+            @foreach(\App\Helpers\ColorHelper::generatePalette($brandPrimary) as $shade => $rgb)
             --color-primary-{{ $shade }}: {{ $rgb }};
             @endforeach
-            @if($whiteLabel->secondaryColor())
-            @foreach(\App\Helpers\ColorHelper::generatePalette($whiteLabel->secondaryColor()) as $shade => $rgb)
-            --color-accent-{{ $shade }}: {{ $rgb }};
-            @endforeach
-            @endif
         }
     </style>
-    @endif
 
     @stack('styles')
 </head>

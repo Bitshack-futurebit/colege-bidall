@@ -98,10 +98,6 @@
         <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
             <p class="text-center text-sm text-gray-500 dark:text-gray-400">
                 &copy; {{ date('Y') }} {{ config('branding.name') }}. All rights reserved.
-                &middot;
-                <a href="https://bidwright.bidall.co.za" target="_blank" rel="noopener"
-                   title="Bidwright — custom online auction software development"
-                   class="text-primary-600 hover:text-primary-700 font-medium">Contact my developer</a>
             </p>
         </div>
     </div>

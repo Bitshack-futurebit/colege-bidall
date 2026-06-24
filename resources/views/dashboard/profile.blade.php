@@ -181,7 +181,7 @@
                                         </div>
                                         <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">
                                             Upload a clear photo or scan of your South African ID, passport, or driver's licence.
-                                            Your document is stored securely and only reviewed by BidAll staff to reduce fraud.
+                                            Your document is stored securely and only reviewed by {{ config('branding.name') }} staff to reduce fraud.
                                             Worth <strong>+30 points</strong> once verified.
                                         </p>
 

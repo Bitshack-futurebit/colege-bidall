@@ -88,23 +88,7 @@
     </div>
     @endif
 
-    <!-- Developer / Auction Software CTA -->
-    <div class="py-12 bg-gray-50 dark:bg-gray-900">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">
-                Want your own auction platform?
-            </h2>
-            <p class="text-base text-gray-600 dark:text-gray-400 mb-6">
-                {{ config('branding.name') }} is built by Bidwright &mdash; custom online auction software
-                for English, Dutch, and sealed-bid auctions. Get a platform like this for your business.
-            </p>
-            <a href="https://bidwright.bidall.co.za" target="_blank" rel="noopener"
-               title="Bidwright — custom online auction software development"
-               class="btn btn-primary inline-flex items-center justify-center min-h-[44px] px-8 rounded-xl">
-                Explore auction software &rarr;
-            </a>
-        </div>
-    </div>
+    {{-- BidWright / auction-software CTA REMOVED — not relevant to the Auction College brand. --}}
 
     @push('scripts')
     @php
