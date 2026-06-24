@@ -4,15 +4,16 @@
 
     {{-- ── Presentation slideshow (replaces the map) ──
          Edit the $slides array below to change the deck. Per-slide fields (all optional except title):
-           variant  = 'title' | 'closing' | 'cta'  → blue accent slide
-           logo     = true                          → show the ACSA logo (title slide)
-           eyebrow  = small label above the headline
-           title    = the big headline
-           body     = supporting sentence
-           bullets  = list of points (rendered with ticks)
-           cards    = list of { tag, title, body } shown as a grid (2 or 4 reads best)
-           footnote = small italic note (e.g. pricing disclaimer)
-         Present with the Next/Back buttons, the dots, or the ← → arrow keys. --}}
+           variant   = 'title' | 'closing' | 'cta'  → blue accent slide
+           logo      = true                          → show the ACSA logo (title slide)
+           eyebrow   = small label above the headline
+           title     = the big headline
+           body      = supporting sentence
+           bullets   = list of points (rendered with ticks)
+           cards     = list of { tag, title, body } shown as a grid (2 or 4 reads best)
+           footnote  = small italic note (e.g. pricing disclaimer)
+           narration = the spoken script for this slide (falls back to title/body/bullets)
+         Present with the Next/Back buttons, the dots, the ← → arrow keys, or hands-free Auto-play. --}}
     @php
         $slides = [
             [
@@ -21,12 +22,14 @@
                 'eyebrow' => 'Auctioneering College of SA',
                 'title'   => 'Bridging Traditional Auctioneering with Online Execution',
                 'body'    => 'A strategic programme proposal',
+                'narration' => 'Auctioneering College of South Africa. Bridging traditional auctioneering with online execution. A strategic programme proposal.',
             ],
             [
                 'eyebrow'  => 'The Strategic Opportunity',
                 'title'    => 'The industry is moving online — education has not caught up',
                 'body'     => 'Auctioneering is shifting from in-person formats to scalable, technology-driven online systems. Yet no South African college has integrated practical online auction operations into its core curriculum.',
                 'footnote' => 'First-mover advantage: become the national leader in accredited digital auction education.',
+                'narration' => 'The auction industry is undergoing a structural shift, from in-person formats to scalable, technology-driven online systems. Yet no South African college has integrated practical online auction operations into its core curriculum. This is a clear first-mover opportunity to become the national leader in accredited digital auction education.',
             ],
             [
                 'eyebrow' => 'Industry Context',
@@ -39,11 +42,13 @@
                     'Government & municipal asset sales',
                     'Retail surplus & corporate asset recovery',
                 ],
+                'narration' => 'Online auctions are fast becoming the default mechanism. For property disposals. Estate agency sales. Liquidation and insolvency processes. Government and municipal asset sales. And retail surplus and corporate asset recovery.',
             ],
             [
                 'eyebrow' => 'The Gap',
                 'title'   => 'Today these skills are learned informally — not taught',
                 'body'    => 'Most practitioners pick up online systems through fragmented tools and platforms, not structured education. That leaves a gap between traditional auction training and real-world digital execution. This programme is built to close it.',
+                'narration' => 'Today, most practitioners learn these systems informally, through fragmented tools and platforms, rather than structured education. That leaves a clear gap between traditional auction training and real-world digital execution. This programme is built to close that gap.',
             ],
             [
                 'eyebrow' => 'The Proposal',
@@ -52,16 +57,19 @@
                     ['tag' => 'Product 1', 'title' => 'Digital Auction Fundamentals', 'body' => 'A curriculum enhancement integrated into the existing auctioneering qualification.'],
                     ['tag' => 'Product 2', 'title' => 'Certified Digital Auctioneer', 'body' => 'A standalone professional certification in end-to-end online auction operations.'],
                 ],
+                'narration' => 'We propose a dual-programme model. Product one: a Digital Auction Fundamentals module, integrated into your existing auctioneering qualification. Product two: a standalone, Certified Digital Auctioneer programme, focused entirely on online auction operations.',
             ],
             [
                 'eyebrow' => 'Product 1 · Curriculum Enhancement',
                 'title'   => 'Digital Auction Fundamentals Module',
                 'body'    => 'Integrates practical online auction capability into the existing qualification — ensuring graduates are operationally competent in both traditional and digital auction environments.',
+                'narration' => 'Product one. The Digital Auction Fundamentals module integrates practical online auction capability into the existing auctioneering qualification, ensuring graduates are operationally competent in both traditional and digital auction environments.',
             ],
             [
                 'eyebrow' => 'Product 2 · Flagship Certification',
                 'title'   => 'Certified Digital Auctioneer Programme',
                 'body'    => 'Establishes the College as a national centre of excellence for digital auction training — producing industry-ready professionals who can independently run end-to-end online auctions.',
+                'narration' => 'Product two, the flagship. The Certified Digital Auctioneer programme establishes the College as a national centre of excellence for digital auction training, producing industry-ready professionals who can independently run end-to-end online auction operations.',
             ],
             [
                 'eyebrow' => 'Strategic Value to the College',
@@ -73,6 +81,7 @@
                     'Strengthen partnerships with estate agencies, insolvency practitioners & corporate asset managers',
                     'Stay ahead of curriculum changes likely in the next 3–5 years',
                 ],
+                'narration' => 'For the College, this is more than a course. It expands your offering into a new digital vertical. It attracts working professionals beyond the traditional student pipeline. It develops C-P-D accredited revenue streams. It strengthens partnerships with estate agencies, insolvency practitioners, and corporate asset managers. And it positions you ahead of curriculum changes likely to emerge in the next three to five years.',
             ],
             [
                 'eyebrow'  => 'Commercial Models',
@@ -84,18 +93,21 @@
                     ['tag' => 'Hybrid', 'title' => 'Training + access', 'body' => 'Blended delivery with software-environment access.'],
                 ],
                 'footnote' => 'Indicative structures for discussion — final pricing shaped to the College’s goals.',
+                'narration' => 'Pricing is flexible and partnership-based. It can be structured as a per-student enrolment fee, an institutional licensing model, a revenue-sharing partnership, or a hybrid of training and software access. The final structure is shaped entirely to the College’s goals.',
             ],
             [
                 'variant' => 'closing',
                 'eyebrow' => 'Closing Position',
                 'title'   => 'Be the first to bridge the craft and the channel',
                 'body'    => 'This is not about adding digital content to a curriculum. It is about positioning the College as the first institution in South Africa to formally bridge traditional auctioneering with modern online auction execution.',
+                'narration' => 'This proposal is not simply about adding digital content to an existing curriculum. It is about positioning the College as the first institution in South Africa to formally bridge traditional auctioneering with modern online auction execution.',
             ],
             [
                 'variant' => 'cta',
                 'eyebrow' => 'Let’s Begin',
                 'title'   => 'Bid live — right now',
                 'body'    => 'Have your phone ready. In the next two minutes, you will run and win a real online auction on this platform.',
+                'narration' => 'Now, let us begin. Have your phone ready. In the next two minutes, you will run, and win, a real online auction on this very platform.',
             ],
         ];
     @endphp
@@ -106,11 +118,56 @@
                 x-data="{
                     current: 0,
                     slides: @js($slides),
+                    voice: null,
+                    speaking: false,
+                    auto: false,
+                    supported: false,
                     accent(s) { return ['title', 'closing', 'cta'].includes(s.variant); },
-                    next() { if (this.current < this.slides.length - 1) this.current++; },
-                    prev() { if (this.current > 0) this.current--; },
-                    go(i) { this.current = i; },
+                    pickVoice() {
+                        if (!window.speechSynthesis) return;
+                        const vs = speechSynthesis.getVoices();
+                        if (!vs.length) return;
+                        const pref = ['Google UK English Male', 'Microsoft David', 'Microsoft Mark', 'Daniel', 'James', 'Microsoft George', 'Microsoft Guy'];
+                        this.voice = vs.find(v => pref.some(p => v.name.includes(p)))
+                            || vs.find(v => /male/i.test(v.name))
+                            || vs.find(v => v.lang === 'en-GB')
+                            || vs.find(v => v.lang && v.lang.startsWith('en'))
+                            || vs[0];
+                    },
+                    scriptFor(s) {
+                        if (s.narration) return s.narration;
+                        let parts = [s.title];
+                        if (s.body) parts.push(s.body);
+                        if (s.bullets) parts.push(s.bullets.join('. '));
+                        if (s.cards) parts.push(s.cards.map(c => c.title + '. ' + c.body).join('. '));
+                        return parts.join('. ');
+                    },
+                    narrate() {
+                        if (!window.speechSynthesis) return;
+                        speechSynthesis.cancel();
+                        const u = new SpeechSynthesisUtterance(this.scriptFor(this.slides[this.current]));
+                        if (this.voice) u.voice = this.voice;
+                        u.pitch = 0.8; u.rate = 0.95; u.volume = 1;
+                        u.onend = () => {
+                            this.speaking = false;
+                            if (this.auto && this.current < this.slides.length - 1) {
+                                this.current++;
+                                this.$nextTick(() => this.narrate());
+                            } else if (this.current >= this.slides.length - 1) {
+                                this.auto = false;
+                            }
+                        };
+                        u.onerror = () => { this.speaking = false; };
+                        this.speaking = true;
+                        speechSynthesis.speak(u);
+                    },
+                    stopNarration() { if (window.speechSynthesis) speechSynthesis.cancel(); this.speaking = false; },
+                    toggleAuto() { this.auto = !this.auto; this.auto ? this.narrate() : this.stopNarration(); },
+                    next() { this.stopNarration(); this.auto = false; if (this.current < this.slides.length - 1) this.current++; },
+                    prev() { this.stopNarration(); this.auto = false; if (this.current > 0) this.current--; },
+                    go(i) { this.stopNarration(); this.auto = false; this.current = i; },
                 }"
+                x-init="supported = !!window.speechSynthesis; pickVoice(); if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => pickVoice();"
                 x-on:keydown.window.arrow-right="next()"
                 x-on:keydown.window.arrow-left="prev()"
             >
@@ -202,6 +259,25 @@
                         Next
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                     </button>
+                </div>
+
+                {{-- Narration controls (Web Speech API — strong male voice). Hidden if unsupported. --}}
+                <div class="flex items-center justify-center gap-4 mt-4" x-show="supported" x-cloak>
+                    <button type="button" x-on:click="speaking ? stopNarration() : narrate()"
+                            class="inline-flex items-center gap-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">
+                        <template x-if="!speaking">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/></svg>
+                        </template>
+                        <template x-if="speaking">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                        </template>
+                        <span x-text="speaking ? 'Stop narration' : 'Narrate slide'"></span>
+                    </button>
+                    <label class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 cursor-pointer select-none">
+                        <input type="checkbox" x-model="auto" x-on:change="auto ? narrate() : stopNarration()"
+                               class="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                        Auto-play (hands-free)
+                    </label>
                 </div>
             </div>
         </div>
