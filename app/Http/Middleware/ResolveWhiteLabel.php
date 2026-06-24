@@ -30,6 +30,13 @@ class ResolveWhiteLabel
 
     public function handle(Request $request, Closure $next): Response
     {
+        // White-label PARKED for the standalone product.
+        // Per-auctioneer branding is never activated: we share the (inactive) context
+        // so every view referencing $whiteLabel still resolves and renders the default
+        // brand. The resolution logic below is retained dormant for easy restore.
+        View::share('whiteLabel', $this->context);
+        return $next($request);
+
         $path = $request->path();
 
         // Admin panel pages never apply white-label branding — admins always see BidAll chrome.
