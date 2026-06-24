@@ -29,12 +29,12 @@ Schedule::command('relists:reset')->dailyAt('04:00');
 // Process queued jobs (broadcast emails, etc.) - runs via cron, no persistent worker needed
 Schedule::command('queue:work --stop-when-empty --tries=3 --timeout=60')->everyMinute()->withoutOverlapping();
 
-// Community auctions
-// Runs daily — covers both weekly schedules and monthly "Nth weekday" schedules.
-// Idempotent: skips schedules whose next auction already exists.
-Schedule::command('community:create-next-auction')->dailyAt('00:05');
-Schedule::command('community:lock-lineup')->everyFiveMinutes();
-Schedule::command('community:finalize-confirmations')->everyMinute();
-Schedule::command('community:purge-old')->dailyAt('03:30');
-// Monthly platform-fee invoice nudge — soft reminder, no hard enforcement.
-Schedule::command('community:invoice-fees')->monthlyOn(1, '08:00');
+// Community auctions — PARKED for the standalone college product.
+// The community subsystem is dormant: no auto-generated community auctions,
+// no lineup locks, confirmations, purges, or fee invoices. Commands still exist
+// on disk but are never scheduled. Restore these lines to re-enable community.
+// Schedule::command('community:create-next-auction')->dailyAt('00:05');
+// Schedule::command('community:lock-lineup')->everyFiveMinutes();
+// Schedule::command('community:finalize-confirmations')->everyMinute();
+// Schedule::command('community:purge-old')->dailyAt('03:30');
+// Schedule::command('community:invoice-fees')->monthlyOn(1, '08:00');

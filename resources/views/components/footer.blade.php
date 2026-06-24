@@ -63,10 +63,8 @@
                 <h4 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4">Platform</h4>
                 <ul class="space-y-2">
                     <li><a href="{{ route('auctions.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Browse Auctions</a></li>
-                    <li><a href="{{ route('communities.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Community Auctions</a></li>
-                    <li><a href="{{ route('community.sell-landing') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Sell in Your Community</a></li>
+                    {{-- Community Auctions / Sell in Your Community / Become a Community Agent links PARKED — community subsystem dormant in standalone product --}}
                     <li><a href="{{ route('register.seller') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Register as Auctioneer</a></li>
-                    <li><a href="{{ route('agents.landing') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Become a Community Agent</a></li>
                 </ul>
             </div>
 
