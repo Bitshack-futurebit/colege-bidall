@@ -1,0 +1,57 @@
+{
+    "name": "Bidall - Online Auctions",
+    "short_name": "Bidall",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#22c55e",
+    "background_color": "#0a0a0f",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Browse Auctions",
+            "short_name": "Auctions",
+            "description": "See all live and upcoming auctions",
+            "url": "/auctions",
+            "icons": [{"src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png"}]
+        },
+        {
+            "name": "Communities",
+            "short_name": "Communities",
+            "description": "Find your local community auction",
+            "url": "/auctioneers?type=community",
+            "icons": [{"src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png"}]
+        },
+        {
+            "name": "My Dashboard",
+            "short_name": "Dashboard",
+            "description": "Bids, watchlist, won lots",
+            "url": "/dashboard",
+            "icons": [{"src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png"}]
+        },
+        {
+            "name": "List Community Lot",
+            "short_name": "List Item",
+            "description": "Add an item to your local community auction",
+            "url": "/community/list-item",
+            "icons": [{"src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png"}]
+        }
+    ]
+}

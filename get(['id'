@@ -1,0 +1,15 @@
+
+Unrecognized project F:/basic_bidall
+
+Untrusted projects run in Restricted Mode to protect your system.
+
+Trusting this project would enable:
+  - local PsySH binary
+
+
+Local PsySH version detected at F:/basic_bidall.
+Re-run PsySH to use the trusted local version, or pass --trust-project to use it immediately.
+
+Psy Shell v0.12.19 (PHP 8.3.30 — cli) by Justin Hileman
+New PHP manual is available (latest: 3.0.2). Update with `doc --update-manual`
+

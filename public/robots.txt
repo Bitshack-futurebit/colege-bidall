@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Application private areas
+Disallow: /admin/
+Disallow: /seller/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+
+# WordPress remnants — site migrated from WordPress, these never existed here
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /wp-login.php
+Disallow: /wp-*.php
+Disallow: /feed
+Disallow: /author/
+Disallow: /category/
+Disallow: /tag/
+Disallow: /shop/
+Disallow: /auction/
+
+Sitemap: https://bidall.co.za/sitemap.xml

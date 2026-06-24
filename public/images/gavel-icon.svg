@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+  <!-- Classic auctioneer's gavel -->
+  <g transform="rotate(-30 256 256)">
+    <!-- Gavel head (thick barrel/cylinder) -->
+    <path d="M340 140 C360 140, 380 150, 380 165 L380 195 C380 210, 360 220, 340 220 L260 220 C240 220, 220 210, 220 195 L220 165 C220 150, 240 140, 260 140 Z"/>
+
+    <!-- Gavel handle (thin rod) -->
+    <rect x="290" y="220" width="20" height="140" rx="10"/>
+  </g>
+
+  <!-- Sound block / striking board -->
+  <rect x="80" y="360" width="120" height="40" rx="8"/>
+  <ellipse cx="140" cy="400" rx="60" ry="12" opacity="0.3"/>
+</svg>
