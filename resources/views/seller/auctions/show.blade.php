@@ -59,7 +59,15 @@
                     </div>
                     <div>
                         <div class="text-sm text-gray-600 dark:text-gray-400">End Time</div>
-                        <div class="text-lg font-semibold">{{ $auction->end_time ? $auction->end_time->format('M d, Y H:i') : 'Auto-calculated' }}</div>
+                        <div class="text-lg font-semibold">
+                            @if($auction->isLiveFormat())
+                                When the last lot sells
+                            @elseif($auction->isDutch())
+                                Auto-calculated
+                            @else
+                                {{ $auction->end_time ? $auction->end_time->format('M d, Y H:i') : 'Auto-calculated' }}
+                            @endif
+                        </div>
                     </div>
                     <div>
                         <div class="text-sm text-gray-600 dark:text-gray-400">Total Lots</div>
@@ -349,7 +357,15 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">End</span>
-                            <span class="font-semibold text-gray-900 dark:text-gray-100">{{ $auction->end_time->format('M d, Y \a\t H:i') }}</span>
+                            <span class="font-semibold text-gray-900 dark:text-gray-100">
+                                @if($auction->isLiveFormat())
+                                    When the last lot sells
+                                @elseif($auction->isDutch())
+                                    Auto-calculated
+                                @else
+                                    {{ $auction->end_time ? $auction->end_time->format('M d, Y \a\t H:i') : 'Auto-calculated' }}
+                                @endif
+                            </span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600 dark:text-gray-400">Active Lots</span>
