@@ -119,20 +119,44 @@
                     current: 0,
                     slides: @js($slides),
                     voice: null,
+                    voices: [],
+                    selectedURI: '',
                     speaking: false,
                     auto: false,
                     supported: false,
                     accent(s) { return ['title', 'closing', 'cta'].includes(s.variant); },
-                    pickVoice() {
+                    loadVoices() {
                         if (!window.speechSynthesis) return;
-                        const vs = speechSynthesis.getVoices();
-                        if (!vs.length) return;
-                        const pref = ['Google UK English Male', 'Microsoft David', 'Microsoft Mark', 'Daniel', 'James', 'Microsoft George', 'Microsoft Guy'];
-                        this.voice = vs.find(v => pref.some(p => v.name.includes(p)))
-                            || vs.find(v => /male/i.test(v.name))
-                            || vs.find(v => v.lang === 'en-GB')
-                            || vs.find(v => v.lang && v.lang.startsWith('en'))
-                            || vs[0];
+                        const all = speechSynthesis.getVoices();
+                        if (!all.length) return;
+                        this.voices = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+                        if (!this.voices.length) this.voices = all;
+                        const saved = localStorage.getItem('acsa_voice');
+                        if (saved && this.voices.some(v => v.voiceURI === saved)) {
+                            this.selectedURI = saved;
+                        } else if (!this.selectedURI) {
+                            this.selectedURI = (this.bestVoice() || this.voices[0] || {}).voiceURI || '';
+                        }
+                        this.applyVoice();
+                    },
+                    bestVoice() {
+                        const pref = ['Natural', 'Online', 'Christopher', 'Guy', 'Roger', 'Eric', 'Steffan', 'Google UK English Male', 'Microsoft David', 'Microsoft Mark', 'Daniel', 'James'];
+                        return this.voices.find(v => pref.some(p => v.name.includes(p)))
+                            || this.voices.find(v => /male/i.test(v.name))
+                            || this.voices.find(v => v.lang === 'en-GB')
+                            || this.voices[0];
+                    },
+                    applyVoice() {
+                        this.voice = this.voices.find(v => v.voiceURI === this.selectedURI) || null;
+                        if (this.selectedURI) localStorage.setItem('acsa_voice', this.selectedURI);
+                    },
+                    preview() {
+                        if (!window.speechSynthesis) return;
+                        speechSynthesis.cancel();
+                        const u = new SpeechSynthesisUtterance('This is the Auctioneering College of South Africa, where we run live online auctions.');
+                        if (this.voice) u.voice = this.voice;
+                        u.pitch = 0.9; u.rate = 0.95;
+                        speechSynthesis.speak(u);
                     },
                     scriptFor(s) {
                         if (s.narration) return s.narration;
@@ -147,7 +171,7 @@
                         speechSynthesis.cancel();
                         const u = new SpeechSynthesisUtterance(this.scriptFor(this.slides[this.current]));
                         if (this.voice) u.voice = this.voice;
-                        u.pitch = 0.8; u.rate = 0.95; u.volume = 1;
+                        u.pitch = 0.9; u.rate = 0.95; u.volume = 1;
                         u.onend = () => {
                             this.speaking = false;
                             if (this.auto && this.current < this.slides.length - 1) {
@@ -167,7 +191,7 @@
                     prev() { this.stopNarration(); this.auto = false; if (this.current > 0) this.current--; },
                     go(i) { this.stopNarration(); this.auto = false; this.current = i; },
                 }"
-                x-init="supported = !!window.speechSynthesis; pickVoice(); if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => pickVoice();"
+                x-init="supported = !!window.speechSynthesis; loadVoices(); if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => loadVoices();"
                 x-on:keydown.window.arrow-right="next()"
                 x-on:keydown.window.arrow-left="prev()"
             >
@@ -259,6 +283,17 @@
                         Next
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                     </button>
+                </div>
+
+                {{-- Voice picker — audition the voices installed on this machine and keep the best. --}}
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-5" x-show="supported" x-cloak>
+                    <label class="text-sm text-gray-600 dark:text-gray-400">Narrator voice</label>
+                    <select x-model="selectedURI" x-on:change="applyVoice()" class="input text-sm" style="max-width: 340px">
+                        <template x-for="v in voices" :key="v.voiceURI">
+                            <option :value="v.voiceURI" x-text="v.name + ' (' + v.lang + ')'"></option>
+                        </template>
+                    </select>
+                    <button type="button" x-on:click="preview()" class="btn btn-outline text-sm">Preview</button>
                 </div>
 
                 {{-- Narration controls (Web Speech API — strong male voice). Hidden if unsupported. --}}
