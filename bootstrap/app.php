@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
 
         $middleware->web(append: [
+            \App\Http\Middleware\RedirectParkedFeatures::class,
             \App\Http\Middleware\EnsureUserActive::class,
             \App\Http\Middleware\EnsureTermsAccepted::class,
             \App\Http\Middleware\ResolveWhiteLabel::class,

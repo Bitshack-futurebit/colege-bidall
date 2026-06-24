@@ -1,0 +1,3 @@
+# Auctioneering College of SA — Laravel scheduler (drives auction status updates,
+# live-phase advancement, lot closings, and queued jobs via routes/console.php).
+* * * * * www-data php /var/www/bidall-college/artisan schedule:run >> /dev/null 2>&1

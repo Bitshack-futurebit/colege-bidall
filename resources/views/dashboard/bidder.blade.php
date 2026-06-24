@@ -5,28 +5,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Welcome back, {{ $user->name }}!</h1>
 
-            {{-- Show only for users actively engaged in the agent program (not the recruitment CTA — that's a public landing page) --}}
-            @php $agent = $user->agent; @endphp
-            @if($agent && $agent->status === 'pending')
-                <div class="card mb-6 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500">
-                    <div>
-                        <h2 class="font-bold text-amber-900 dark:text-amber-200">Agent application under review</h2>
-                        <p class="text-sm text-amber-800 dark:text-amber-300">We'll be in touch shortly.</p>
-                    </div>
-                    <a href="{{ route('agent.apply') }}" class="text-sm text-amber-800 dark:text-amber-300 hover:underline whitespace-nowrap">View status &rarr;</a>
-                </div>
-            @elseif($agent && $agent->status === 'active')
-                <div class="card mb-6 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 bg-teal-50 dark:bg-teal-900/20 border-l-4 border-teal-500">
-                    <div>
-                        <h2 class="font-bold text-teal-900 dark:text-teal-200">You're a Community Agent</h2>
-                        <p class="text-sm text-teal-800 dark:text-teal-300">Referral code: <span class="font-mono font-bold tracking-wider">{{ $agent->referral_code }}</span></p>
-                    </div>
-                    <a href="{{ route('agent.dashboard') }}" class="btn bg-teal-600 hover:bg-teal-700 text-white whitespace-nowrap">Open agent dashboard &rarr;</a>
-                </div>
-            @endif
+            {{-- Community Agent status block PARKED — community/agent subsystem dormant in standalone product. --}}
 
             <!-- Quick Actions -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <a href="{{ route('auctions.index') }}" class="card card-hover p-6 text-center">
                     <svg class="w-12 h-12 mx-auto mb-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -66,15 +48,7 @@
                     </p>
                 </a>
 
-                @php $communityListedCount = \Schema::hasColumn('lots', 'seller_user_id') ? \App\Models\Lot::where('seller_user_id', auth()->id())->count() : 0; @endphp
-                <a href="{{ route('community.my-lots') }}" class="card card-hover p-6 text-center">
-                    <svg class="w-12 h-12 mx-auto mb-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">My Community Listings</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $communityListedCount }} listed</p>
-                </a>
+                {{-- My Community Listings card PARKED — community subsystem dormant in standalone product. --}}
             </div>
 
             <!-- Winning Lots -->
