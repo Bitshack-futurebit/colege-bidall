@@ -13,20 +13,8 @@
                 </a>
             </div>
 
-            <!-- Credit Balance -->
-            <div class="card mb-8 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
-                <div class="p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-sm opacity-90 mb-1">Credit Balance</div>
-                            <div class="text-4xl font-bold">{{ formatCurrency($auctioneer->credit_balance) }}</div>
-                        </div>
-                        <a href="{{ route('seller.credits') }}" class="btn bg-white text-primary-600 hover:bg-gray-100">
-                            Buy Credits
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {{-- Credit Balance / Buy Credits card PARKED — free standalone product has no
+                 credits or payments. Restore for a paid deployment. --}}
 
             <!-- Invite Link -->
             <div class="card mb-8" x-data="{ copied: false }">
