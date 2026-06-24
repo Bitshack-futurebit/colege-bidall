@@ -318,13 +318,13 @@ class AuthController extends Controller
 
         // Redirect based on role
         if ($user->isAuctioneer()) {
-            return redirect()->route('seller.credits')
-                ->with('success', 'Welcome to the BidAll family, ' . $user->name . '! Purchase credits to start creating auctions. Minimum deposit: ' . formatCurrency(config('platform.pricing.minimum_deposit', 100)))
+            return redirect()->route('seller.dashboard')
+                ->with('success', 'Welcome, ' . $user->name . '! Your auctioneer account is ready — create your first auction to get started.')
                 ->with('push_prompt', true);
         }
 
         return redirect()->route('dashboard')
-            ->with('success', 'Welcome to the BidAll family, ' . $user->name . '!')
+            ->with('success', 'Welcome, ' . $user->name . '!')
             ->with('push_prompt', true);
     }
 
@@ -379,8 +379,8 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('seller.credits')
-            ->with('success', 'Welcome to the BidAll family, ' . $user->name . '! Purchase credits to start creating auctions. Minimum deposit: ' . formatCurrency(config('platform.pricing.minimum_deposit', 100)))
+        return redirect()->route('seller.dashboard')
+            ->with('success', 'Welcome, ' . $user->name . '! Your auctioneer account is ready — create your first auction to get started.')
             ->with('push_prompt', true);
     }
 

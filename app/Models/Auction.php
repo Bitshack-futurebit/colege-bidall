@@ -359,6 +359,11 @@ class Auction extends Model
      */
     public function hasOnlinePayment(): bool
     {
+        // MONETIZATION PARKED — free standalone product: no real bidder settlement.
+        // Returning false hides every "Pay Now" prompt across won-lot views; winners
+        // are simply recorded at hammer price. Restore the line below for a paid deployment.
+        return false;
+
         return $this->enable_online_payment && $this->auctioneer->hasPayfastConfigured();
     }
 
