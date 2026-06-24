@@ -8,7 +8,7 @@
             {{-- Community Agent status block PARKED — community/agent subsystem dormant in standalone product. --}}
 
             <!-- Quick Actions -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <a href="{{ route('auctions.index') }}" class="card card-hover p-6 text-center">
                     <svg class="w-12 h-12 mx-auto mb-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -25,13 +25,7 @@
                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ $stats['watchlist'] }} items saved</p>
                 </a>
 
-                <a href="{{ route('dashboard.following') }}" class="card card-hover p-6 text-center">
-                    <svg class="w-12 h-12 mx-auto mb-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Following</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $stats['following'] }} auctioneers</p>
-                </a>
+                {{-- Following card hidden — follow function is not part of the college product. --}}
 
                 <a href="{{ route('dashboard.won') }}" class="card card-hover p-6 text-center relative">
                     @if($stats['won_unpaid'] > 0)

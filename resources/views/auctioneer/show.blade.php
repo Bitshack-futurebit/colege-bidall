@@ -222,20 +222,7 @@
                                     View Rules
                                 </button>
 
-                                @auth
-                                    @if(auth()->user()->role !== 'auctioneer' || auth()->user()->auctioneer->id !== $auctioneer->id)
-                                        <form method="POST" action="{{ route('auctioneer.follow.toggle', $auctioneer) }}" class="inline"
-                                              @if(!auth()->user()->isFollowingAuctioneer($auctioneer->id)) onsubmit="if(window.subscribeToPush) subscribeToPush();" @endif>
-                                            @csrf
-                                            <button type="submit" class="btn {{ auth()->user()->isFollowingAuctioneer($auctioneer->id) ? 'btn-primary' : 'btn-outline' }} btn-sm">
-                                                <svg class="w-5 h-5 mr-2" fill="{{ auth()->user()->isFollowingAuctioneer($auctioneer->id) ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                                                </svg>
-                                                {{ auth()->user()->isFollowingAuctioneer($auctioneer->id) ? 'Following' : 'Follow' }}
-                                            </button>
-                                        </form>
-                                    @endif
-                                @endauth
+                                {{-- Follow button hidden — follow function is not part of the college product. --}}
                             </div>
                         </div>
                     </div>

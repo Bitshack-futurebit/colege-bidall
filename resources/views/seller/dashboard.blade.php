@@ -101,19 +101,7 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="text-sm text-gray-600 dark:text-gray-400">Followers</div>
-                            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ $stats['followers'] }}</div>
-                    </div>
-                </div>
+                {{-- Followers stat hidden — follow function is not part of the college product. --}}
 
                 <a href="{{ route('seller.unsold-lots') }}" class="card card-hover">
                     <div class="p-6">
@@ -209,13 +197,7 @@
                 </a>
                 @endif
 
-                <a href="{{ route('seller.followers') }}" class="card card-hover p-6 text-center">
-                    <svg class="w-12 h-12 mx-auto mb-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Manage Followers</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">View and contact your {{ $stats['followers'] }} followers</p>
-                </a>
+                {{-- Manage Followers card hidden — follow function is not part of the college product. --}}
 
                 <a href="{{ route('seller.notifications') }}" class="card card-hover p-6 text-center">
                     <svg class="w-12 h-12 mx-auto mb-4 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
