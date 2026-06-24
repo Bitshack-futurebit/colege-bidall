@@ -74,8 +74,8 @@
         <p class="text-sm text-gray-600 dark:text-gray-400">
             Already have an account? <a href="{{ route('login') }}" class="text-primary-600 hover:text-primary-700 font-medium">Log in</a>
         </p>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-            Want to run your own auctions? <a href="{{ route('register.seller') }}" class="text-primary-600 hover:text-primary-700 font-medium">Register as Auctioneer</a>
-        </p>
+        {{-- "Register as Auctioneer" public link PARKED — public registration is bidder-only.
+             The single owner-auctioneer is created out-of-band via the unlinked
+             register.seller route (or admin). --}}
     </div>
 </x-guest-layout>

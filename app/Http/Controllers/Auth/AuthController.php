@@ -146,7 +146,10 @@ class AuthController extends Controller
         // Base validation (all users)
         $isBidder = $request->role === 'bidder';
         $rules = [
-            'role' => ['required', 'in:bidder,auctioneer'],
+            // Public registration is BIDDER-ONLY. The single owner-auctioneer is created
+            // out-of-band via the unlinked register.seller route (or admin), so a crafted
+            // POST cannot self-provision an auctioneer here.
+            'role' => ['required', 'in:bidder'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'whatsapp' => ['required', 'string', 'max:20'],

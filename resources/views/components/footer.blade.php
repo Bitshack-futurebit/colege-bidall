@@ -63,8 +63,8 @@
                 <h4 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4">Platform</h4>
                 <ul class="space-y-2">
                     <li><a href="{{ route('auctions.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Browse Auctions</a></li>
-                    {{-- Community Auctions / Sell in Your Community / Become a Community Agent links PARKED — community subsystem dormant in standalone product --}}
-                    <li><a href="{{ route('register.seller') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600">Register as Auctioneer</a></li>
+                    {{-- Community links + "Register as Auctioneer" PARKED — community dormant; public
+                         registration is bidder-only (single owner-auctioneer created out-of-band) --}}
                 </ul>
             </div>
 
