@@ -264,6 +264,9 @@ RULES;
      */
     public function canGoLiveWithAuction(Auction $auction): bool
     {
+        // MONETIZATION PARKED — free product: no credit gate on going live.
+        return true;
+
         $totalCost = $auction->lots
             ->where('is_free_relist', false) // free relists cost nothing
             ->whereNull('withdrawn_at')
@@ -403,6 +406,10 @@ RULES;
 
     public function calculateLotCost(string $imageTier): float
     {
+        // MONETIZATION PARKED — the standalone product is free to use.
+        // Listing a lot never costs credits, regardless of account flags or config.
+        return 0;
+
         // Free accounts pay nothing
         if ($this->is_free_account) {
             return 0;

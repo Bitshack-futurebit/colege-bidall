@@ -4,6 +4,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Platform Percentage Fee — PARKED (free standalone product)
+    |--------------------------------------------------------------------------
+    |
+    | The 1% commission the platform deducts from the auctioneer on each sale.
+    | Set to 0 for the free standalone product: every close path computes a 0
+    | fee and its `if ($platformFee > 0)` guard skips the credit deduction, so
+    | no platform commission is ever charged. Restore to 1 to re-enable.
+    |
+    */
+
+    'platform_percentage_fee' => 0,
+
+    /*
+    |--------------------------------------------------------------------------
     | Lot Closing Stagger
     |--------------------------------------------------------------------------
     |

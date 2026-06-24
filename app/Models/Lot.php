@@ -318,19 +318,22 @@ class Lot extends Model
 
         $this->update($updateData);
 
-        // Deduct 1% platform fee (deferred from close)
+        // Deduct 1% platform fee (deferred from close) — PARKED: fee is 0 in the free
+        // product, guarded so no zero-value credit transactions are written.
         if ($this->current_bid) {
             $hammerPrice = $this->current_bid;
             $buyersPremium = $hammerPrice * ($auction->buyers_premium_percentage / 100);
             $total = $hammerPrice + $buyersPremium;
             $platformFee = $total * (config('auction.platform_percentage_fee', 1) / 100);
 
-            $auction->auctioneer->deductCredits(
-                $platformFee,
-                'lot_close',
-                $this->id,
-                "1% fee for Lot #{$this->lot_number} - {$this->title}"
-            );
+            if ($platformFee > 0) {
+                $auction->auctioneer->deductCredits(
+                    $platformFee,
+                    'lot_close',
+                    $this->id,
+                    "1% fee for Lot #{$this->lot_number} - {$this->title}"
+                );
+            }
         }
     }
 
@@ -557,6 +560,7 @@ class Lot extends Model
         $this->images()->update(['scheduled_deletion_at' => $deletionDate]);
 
         // Deduct 1% platform fee (defer for pending_confirmation — charged on confirm)
+        // PARKED: fee is 0 in the free product, guarded so no zero-value credit rows.
         if ($isSold && !$needsConfirmation && $this->current_bid) {
             $auction = $this->auction;
             $hammerPrice = $this->current_bid;
@@ -564,12 +568,14 @@ class Lot extends Model
             $total = $hammerPrice + $buyersPremium;
             $platformFee = $total * (config('auction.platform_percentage_fee', 1) / 100);
 
-            $auction->auctioneer->deductCredits(
-                $platformFee,
-                'lot_close',
-                $this->id,
-                "1% fee for Lot #{$this->lot_number} - {$this->title}"
-            );
+            if ($platformFee > 0) {
+                $auction->auctioneer->deductCredits(
+                    $platformFee,
+                    'lot_close',
+                    $this->id,
+                    "1% fee for Lot #{$this->lot_number} - {$this->title}"
+                );
+            }
         }
     }
 
