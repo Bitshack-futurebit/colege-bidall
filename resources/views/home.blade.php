@@ -100,7 +100,7 @@
         ];
     @endphp
 
-    <section class="py-10 sm:py-16 bg-gradient-to-b from-primary-50 to-white dark:from-gray-900 dark:to-gray-900">
+    <section class="py-10 sm:py-16 bg-gray-50 dark:bg-gray-900">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
                 x-data="{
@@ -114,27 +114,28 @@
                 x-on:keydown.window.arrow-right="next()"
                 x-on:keydown.window.arrow-left="prev()"
             >
-                {{-- Slide frame --}}
-                <div class="relative overflow-hidden rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 min-h-[460px] sm:min-h-[540px]">
+                {{-- Slide frame (inline min-height + flex so the single visible slide fills it;
+                     avoids arbitrary Tailwind classes that aren't in the precompiled CSS) --}}
+                <div class="relative overflow-hidden rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex" style="min-height: 520px">
                     <template x-for="(slide, i) in slides" :key="i">
                         <div x-show="current === i"
                              x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                             class="absolute inset-0 overflow-y-auto flex flex-col items-center justify-center text-center p-8 sm:p-14"
-                             :class="accent(slide) ? 'bg-gradient-to-br from-primary-600 to-primary-800' : ''">
+                             class="w-full flex flex-col items-center justify-center text-center p-8 sm:p-14"
+                             :style="accent(slide) ? 'background: linear-gradient(135deg, rgb(var(--color-primary-600)), rgb(var(--color-primary-800)))' : ''">
 
                             <template x-if="slide.logo">
                                 <img src="{{ config('branding.logo.default') }}" alt="{{ config('branding.name') }}" class="h-20 w-20 object-contain mb-5 bg-white rounded-full p-1 shadow">
                             </template>
 
                             <div class="text-xs sm:text-sm font-semibold uppercase tracking-widest mb-4"
-                                 :class="accent(slide) ? 'text-primary-100' : 'text-primary-600 dark:text-primary-400'" x-text="slide.eyebrow"></div>
+                                 :class="accent(slide) ? 'text-white' : 'text-primary-600 dark:text-primary-400'" x-text="slide.eyebrow"></div>
 
-                            <h2 class="text-2xl sm:text-4xl font-bold mb-5 leading-tight max-w-3xl"
+                            <h2 class="text-2xl sm:text-4xl font-bold mb-5 leading-tight"
                                 :class="accent(slide) ? 'text-white' : 'text-gray-900 dark:text-gray-100'" x-text="slide.title"></h2>
 
                             <template x-if="slide.body">
                                 <p class="text-base sm:text-xl max-w-2xl leading-relaxed"
-                                   :class="accent(slide) ? 'text-primary-50' : 'text-gray-600 dark:text-gray-300'" x-text="slide.body"></p>
+                                   :class="accent(slide) ? 'text-white' : 'text-gray-600 dark:text-gray-300'" x-text="slide.body"></p>
                             </template>
 
                             <template x-if="slide.bullets">
@@ -151,7 +152,7 @@
                             <template x-if="slide.cards">
                                 <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-3xl">
                                     <template x-for="c in slide.cards" :key="c.title">
-                                        <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-5 text-left">
+                                        <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 p-5 text-left">
                                             <div class="text-xs font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-400 mb-1" x-text="c.tag"></div>
                                             <div class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-1" x-text="c.title"></div>
                                             <div class="text-sm text-gray-600 dark:text-gray-400" x-text="c.body"></div>
@@ -162,39 +163,42 @@
 
                             <template x-if="slide.footnote">
                                 <p class="mt-6 text-xs sm:text-sm italic max-w-xl"
-                                   :class="accent(slide) ? 'text-primary-100' : 'text-gray-500 dark:text-gray-400'" x-text="slide.footnote"></p>
+                                   :class="accent(slide) ? 'text-white' : 'text-gray-500 dark:text-gray-400'" x-text="slide.footnote"></p>
                             </template>
                         </div>
                     </template>
 
                     {{-- Slide counter --}}
                     <div class="absolute top-4 right-5 text-xs font-medium z-10"
-                         :class="accent(slides[current]) ? 'text-primary-100' : 'text-gray-400 dark:text-gray-500'"
+                         :class="accent(slides[current]) ? 'text-white' : 'text-gray-400 dark:text-gray-500'"
                          x-text="(current + 1) + ' / ' + slides.length"></div>
                 </div>
 
                 {{-- Progress bar --}}
-                <div class="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full mt-4 overflow-hidden">
-                    <div class="h-full bg-primary-600 dark:bg-primary-400 rounded-full transition-all duration-300"
+                <div class="bg-gray-200 dark:bg-gray-700 rounded-full mt-4 overflow-hidden" style="height: 6px">
+                    <div class="rounded-full transition-all duration-300"
+                         style="height: 6px; background: rgb(var(--color-primary-600))"
                          :style="'width:' + (((current + 1) / slides.length) * 100) + '%'"></div>
                 </div>
 
                 {{-- Controls --}}
                 <div class="flex items-center justify-between gap-4 mt-5">
                     <button type="button" x-on:click="prev()" :disabled="current === 0"
-                            class="btn btn-outline flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                            :class="current === 0 ? 'opacity-50 pointer-events-none' : ''"
+                            class="btn btn-outline flex items-center justify-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                         Back
                     </button>
                     <div class="flex items-center gap-2">
                         <template x-for="(slide, i) in slides" :key="i">
                             <button type="button" x-on:click="go(i)" :aria-label="'Go to slide ' + (i + 1)"
-                                    class="w-2.5 h-2.5 rounded-full transition-colors"
-                                    :class="current === i ? 'bg-primary-600 dark:bg-primary-400' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"></button>
+                                    class="rounded-full transition-colors" style="width: 10px; height: 10px"
+                                    :class="current === i ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"></button>
                         </template>
                     </div>
                     <button type="button" x-on:click="next()" :disabled="current === slides.length - 1"
-                            class="btn btn-primary flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                            :class="current === slides.length - 1 ? 'opacity-50 pointer-events-none' : ''"
+                            class="btn btn-primary flex items-center justify-center gap-2">
                         Next
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                     </button>
