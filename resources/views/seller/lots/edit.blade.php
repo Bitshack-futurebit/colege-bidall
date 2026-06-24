@@ -60,7 +60,7 @@
                             <div class="flex items-center justify-between mb-3">
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Withdraw Lot</h3>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">Remove this lot from the auction. Lot fees are non-refundable.</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Remove this lot from the auction.</p>
                                 </div>
                                 <button type="button" onclick="document.getElementById('withdrawSection').classList.toggle('hidden')" class="btn btn-warning">
                                     Withdraw Lot
@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="flex gap-3">
                                         <button type="button" onclick="document.getElementById('withdrawSection').classList.add('hidden')" class="btn btn-outline flex-1">Cancel</button>
-                                        <button type="submit" class="btn btn-warning flex-1" onclick="return confirm('Are you sure? Lot fees are non-refundable.');">Confirm Withdrawal</button>
+                                        <button type="submit" class="btn btn-warning flex-1" onclick="return confirm('Are you sure you want to withdraw this lot?');">Confirm Withdrawal</button>
                                     </div>
                                 </form>
                             </div>

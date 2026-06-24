@@ -13,15 +13,7 @@
                 <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Create New Lot</h1>
             </div>
 
-            <!-- Credit Info -->
-            @if($auctioneer->credit_balance == 0)
-                <div class="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-6">
-                    <p class="text-blue-800 dark:text-blue-200">
-                        <strong>💡 Pay-as-you-go:</strong> You can create lots for free! Credits are only deducted when your auction goes live.
-                        <a href="{{ route('seller.credits') }}" class="underline">View pricing</a>
-                    </p>
-                </div>
-            @endif
+            {{-- Credit / pay-as-you-go info PARKED — free standalone product, no fees or credits. --}}
 
             @if($errors->any())
                 <div class="bg-red-50 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg p-4 mb-6">
@@ -479,45 +471,8 @@
                     </div>
                 </div>
 
-                <!-- Cost Summary -->
-                <div class="card bg-gray-50 dark:bg-gray-800">
-                    <div class="p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Cost Summary</h2>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span class="text-gray-600 dark:text-gray-400">Lot fee (deducted when event starts):</span>
-                                @if($auctioneer->is_free_account)
-                                    <span class="font-semibold text-green-600 dark:text-green-400" id="lot-fee">
-                                        FREE
-                                        <span class="text-xs">(Admin override)</span>
-                                    </span>
-                                @elseif($auctioneer->custom_lot_fee)
-                                    <span class="font-semibold text-blue-600 dark:text-blue-400" id="lot-fee">
-                                        {{ formatCurrency($auctioneer->custom_lot_fee) }}
-                                        <span class="text-xs">(Custom pricing)</span>
-                                    </span>
-                                @else
-                                    <span class="font-semibold text-gray-900 dark:text-gray-100" id="lot-fee">{{ formatPrice('platform.pricing.lot_fees.basic') }}</span>
-                                @endif
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-600 dark:text-gray-400">Platform fee (deducted when sold):</span>
-                                <span class="font-semibold text-gray-900 dark:text-gray-100">{{ config('platform.pricing.platform_fee_percent') }}% of final bid</span>
-                            </div>
-                            <div class="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between">
-                                <span class="text-gray-600 dark:text-gray-400">Your credit balance:</span>
-                                <span class="font-semibold text-gray-900 dark:text-gray-100">{{ formatCurrency($auctioneer->credit_balance) }}</span>
-                            </div>
-                            @if($auctioneer->pricing_notes)
-                                <div class="border-t border-gray-200 dark:border-gray-700 pt-2">
-                                    <p class="text-sm text-blue-600 dark:text-blue-400">
-                                        <span class="font-semibold">Note:</span> {{ $auctioneer->pricing_notes }}
-                                    </p>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
+                {{-- Cost Summary card PARKED — free standalone product: no lot fee, no
+                     platform fee, no credits. Restore for a paid deployment. --}}
 
                 <!-- Supplier Information (Internal Only) -->
                 <div class="card" x-data="{ open: {{ old('supplier_name') || old('supplier_id_number') || old('supplier_address') || old('supplier_id') ? 'true' : 'false' }} }">

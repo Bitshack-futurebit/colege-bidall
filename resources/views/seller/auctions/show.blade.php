@@ -358,45 +358,8 @@
                     </div>
                 </div>
 
-                {{-- Credit Cost Breakdown --}}
-                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
-                    <h4 class="font-semibold text-gray-700 dark:text-gray-300 mb-2 text-xs uppercase tracking-wide">Credit Cost</h4>
-                    <div class="space-y-1 text-sm">
-                        @forelse($lotsByTier as $tier => $tierLots)
-                            @php $tierCost = $tierCosts[$tier] ?? 1; @endphp
-                            <div class="flex justify-between">
-                                <span class="text-gray-600 dark:text-gray-400">
-                                    {{ ucfirst($tier) }} ({{ $tierLots->count() }} {{ $tierLots->count() === 1 ? 'lot' : 'lots' }} &times; {{ formatCurrency($tierCost) }})
-                                </span>
-                                <span class="font-semibold">{{ formatCurrency($tierLots->count() * $tierCost) }}</span>
-                            </div>
-                        @empty
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">No active lots</p>
-                        @endforelse
-                        <div class="border-t border-gray-200 dark:border-gray-600 pt-2 mt-2 space-y-1">
-                            <div class="flex justify-between font-semibold">
-                                <span class="text-gray-700 dark:text-gray-300">Total Cost</span>
-                                <span class="text-gray-900 dark:text-gray-100">{{ formatCurrency($auctionCost) }}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-600 dark:text-gray-400">Your Balance</span>
-                                <span class="font-semibold {{ $canAfford ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">{{ formatCurrency($creditBalance) }}</span>
-                            </div>
-                            <div class="flex justify-between font-semibold">
-                                <span class="text-gray-700 dark:text-gray-300">Balance After Publishing</span>
-                                <span class="{{ ($creditBalance - $auctionCost) >= 0 ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400' }} font-semibold">
-                                    {{ formatCurrency($creditBalance - $auctionCost) }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    @if(!$canAfford)
-                        <div class="mt-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded p-3 text-sm text-red-700 dark:text-red-300">
-                            <strong>Insufficient credits.</strong> You need {{ formatCurrency($auctionCost - $creditBalance) }} more to publish.
-                            <a href="{{ route('seller.credits') }}" class="underline font-semibold ml-1">Buy credits</a>
-                        </div>
-                    @endif
-                </div>
+                {{-- Credit Cost Breakdown PARKED — free standalone product: publishing an
+                     auction costs nothing, no credits, no platform fee. --}}
 
                 {{-- Important Warnings --}}
                 <div class="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg p-4 mb-4">
@@ -404,15 +367,11 @@
                     <ul class="space-y-2 text-sm text-amber-800 dark:text-amber-300">
                         <li class="flex items-start gap-2">
                             <span class="mt-0.5 flex-shrink-0">&#9888;</span>
-                            <span>Once published, <strong>lot details are locked</strong>. You may only withdraw lots — lot fees are non-refundable.</span>
+                            <span>Once published, <strong>lot details are locked</strong>. You may only withdraw lots.</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="mt-0.5 flex-shrink-0">&#9888;</span>
                             <span>This auction <strong>cannot be cancelled or deleted</strong> once published.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="mt-0.5 flex-shrink-0">&#9888;</span>
-                            <span>The credit fee of <strong>{{ formatCurrency($auctionCost) }} is non-refundable</strong> once deducted.</span>
                         </li>
                     </ul>
                 </div>
@@ -459,9 +418,6 @@
                 <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100 mb-4">Withdraw Lot</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
                     Withdrawing lot: <strong id="modalLotTitle"></strong>
-                </p>
-                <p class="text-sm text-yellow-600 dark:text-yellow-400 mb-4">
-                    ⚠️ Note: Lot fees are non-refundable. Credits already paid for this lot will not be returned.
                 </p>
                 <form id="withdrawForm" method="POST">
                     @csrf
