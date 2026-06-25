@@ -23,15 +23,21 @@ use Illuminate\Support\Str;
  */
 class SeedCollegeDemo extends Command
 {
-    protected $signature = 'college:seed-demo';
-    protected $description = 'Seed owner-auctioneer + 4 draft demo auctions (one per format) with real images';
+    protected $signature = 'college:seed-demo {--fresh : wipe all existing demo data first (DESTRUCTIVE)}';
+    protected $description = 'Add draft demo auctions (one per format) with real images — additive by default, does NOT wipe existing data';
 
     private const MARKER = '@demo.college.test';
     private const IMG_DIR = 'demo/college-lots'; // under storage/app/public
 
     public function handle(): int
     {
-        $this->cleanup();
+        // ADDITIVE by default: never wipes existing auctions/data. Re-running only adds
+        // catalogue auctions that don't already exist (matched by title) and won't
+        // duplicate the owner/bidders. Use --fresh to deliberately wipe and reseed.
+        if ($this->option('fresh')) {
+            $this->cleanup();
+            $this->warn('--fresh: wiped existing demo data.');
+        }
         $this->copyImages();
 
         $owner = User::updateOrCreate(['email' => 'owner' . self::MARKER], [
@@ -42,15 +48,18 @@ class SeedCollegeDemo extends Command
             'email_verified_at' => now(),
         ]);
 
-        $auctioneer = Auctioneer::create([
-            'user_id' => $owner->id,
-            'business_name' => 'Auctioneering College of SA',
-            'slug' => 'auctioneering-college-of-sa-' . Str::random(5),
-            'whatsapp_number' => '0314000000',
-            'is_activated' => true,
-            'credit_balance' => 0,
-            'is_free_account' => true,
-        ]);
+        // firstOrCreate so re-runs reuse the single owner-auctioneer (no duplicates).
+        $auctioneer = Auctioneer::firstOrCreate(
+            ['user_id' => $owner->id],
+            [
+                'business_name' => 'Auctioneering College of SA',
+                'slug' => 'auctioneering-college-of-sa-' . Str::random(5),
+                'whatsapp_number' => '0314000000',
+                'is_activated' => true,
+                'credit_balance' => 0,
+                'is_free_account' => true,
+            ]
+        );
 
         // ---- Auction catalogue (all DRAFT) ----
         // Non-Dutch lot: [title, description, image, starting_bid, increment, reserve]
@@ -135,7 +144,15 @@ class SeedCollegeDemo extends Command
              ]],
         ];
 
+        $added = 0;
+        $skipped = 0;
         foreach ($catalogue as $a) {
+            // Additive + idempotent: skip an auction that already exists (matched by title)
+            // so existing/edited/published auctions are never touched or duplicated.
+            if (Auction::where('auctioneer_id', $auctioneer->id)->where('title', $a['title'])->exists()) {
+                $skipped++;
+                continue;
+            }
             $auction = $this->auction($auctioneer, $a['type'], $a['title'], $a['desc'], $a['extra'] ?? []);
             $n = 1;
             foreach ($a['lots'] as $lotData) {
@@ -145,6 +162,7 @@ class SeedCollegeDemo extends Command
                     $this->lot($auction, $n++, $lotData[0], $lotData[1], $lotData[2], $lotData[3], $lotData[4], $lotData[5] ?? 0);
                 }
             }
+            $added++;
         }
 
         // ---- Two demo bidder logins (so the site can be tested as a student) ----
@@ -159,7 +177,7 @@ class SeedCollegeDemo extends Command
         }
 
         $this->newLine();
-        $this->info('🟢 Seeded ' . count($catalogue) . ' DRAFT auctions across all four formats for "Auctioneering College of SA".');
+        $this->info("🟢 Added {$added} new DRAFT auction(s); skipped {$skipped} already present (catalogue total " . count($catalogue) . ").");
         $this->line('  Owner auctioneer login: owner' . self::MARKER . ' / password');
         $this->line('  Demo bidder logins:     student1' . self::MARKER . ', student2' . self::MARKER . ' / password');
         $this->line('  All auctions are DRAFT — publish them from the dashboard when ready.');
