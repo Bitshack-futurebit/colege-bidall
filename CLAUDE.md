@@ -1,3 +1,14 @@
+> **⚠️ AUCTION COLLEGE PROJECT — SCOPE BANNER**
+> This repo is the **auction TRAINING platform** for the **Auction College** project
+> (`college.bidall.co.za`). That project = exactly 3 components: **SACA** (`F:\saca`),
+> the **Online Auctioneering Academy** (`F:\online auctioneering\site`), and **this
+> training platform**. Treat this app as **STANDALONE** — do NOT pull in the commercial
+> **BidAll** (`bidall.co.za`, `F:\basic_bidall`, its credit purchases / relaunch) or any
+> other BitShack app.
+> Architecture/migration plan: `F:\Project extentions\auction colege\unified-college-site-architecture.md`
+
+---
+
 # Claude Instructions for Basic BidAll Auction Platform
 
 ## Project Overview
