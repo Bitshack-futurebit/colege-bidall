@@ -23,7 +23,7 @@
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#22c55e">
+    <meta name="theme-color" content="#1565c0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,7 +32,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700|playfair-display:600,700" rel="stylesheet" />
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -41,8 +41,10 @@
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
         <!-- Logo -->
         <div class="mb-6">
-            <a href="/">
-                <h1 class="text-3xl font-bold text-primary-600 dark:text-primary-400">
+            <a href="/" class="flex flex-col items-center gap-3">
+                <img src="{{ config('branding.logo.default') }}" alt="{{ config('branding.name') }}" class="h-16 w-16 object-contain">
+                <h1 class="text-center text-2xl font-bold text-primary-600 dark:text-primary-400 leading-tight max-w-xs"
+                    style="font-family: 'Playfair Display', Georgia, serif;">
                     {{ config('branding.name') }}
                 </h1>
             </a>
@@ -66,7 +68,7 @@
         @endif
 
         <!-- Content -->
-        <div class="w-full sm:max-w-md px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+        <div class="w-full sm:max-w-md px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg border-t-4 border-[#c9a227]">
             {{ $slot }}
         </div>
 

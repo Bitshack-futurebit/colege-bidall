@@ -10,7 +10,7 @@
      Mobile: logo + bell + dark mode only
      Desktop: logo + nav links + auth
 ═══════════════════════════════════════════════ --}}
-<nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40">
+<nav class="bg-white dark:bg-gray-800 border-b-2 border-[#c9a227] sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
 
@@ -24,12 +24,12 @@
                         @else
                             <div class="h-12 w-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-xl font-bold">{{ substr($whiteLabel->businessName(), 0, 1) }}</div>
                         @endif
-                        <span class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{ $whiteLabel->businessName() }}</span>
+                        <span class="text-2xl font-bold text-primary-600 dark:text-primary-400" style="font-family: 'Playfair Display', Georgia, serif;">{{ $whiteLabel->businessName() }}</span>
                     </a>
                     @else
                     <a href="/" class="flex items-center gap-2">
                         <img src="{{ config('branding.logo.default') }}" alt="{{ config('branding.name') }}" class="h-12 w-12 object-contain">
-                        <span class="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400 leading-tight">{{ config('branding.name') }}</span>
+                        <span class="text-base sm:text-lg font-bold text-primary-600 dark:text-primary-400 leading-tight max-w-[13rem]" style="font-family: 'Playfair Display', Georgia, serif;">{{ config('branding.name') }}</span>
                     </a>
                     @endif
                 </div>

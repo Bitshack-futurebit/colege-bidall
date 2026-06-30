@@ -25,18 +25,18 @@
         --color-primary-900: 20 83 45;
         --color-primary-950: 5 46 22;
 
-        /* Accent: Red (#ef4444) */
-        --color-accent-50: 254 242 242;
-        --color-accent-100: 254 226 226;
-        --color-accent-200: 254 202 202;
-        --color-accent-300: 252 165 165;
-        --color-accent-400: 248 113 113;
-        --color-accent-500: 239 68 68;
-        --color-accent-600: 220 38 38;
-        --color-accent-700: 185 28 28;
-        --color-accent-800: 153 27 27;
-        --color-accent-900: 127 29 29;
-        --color-accent-950: 69 10 10;
+        /* Accent: SACA gold (#c9a227) */
+        --color-accent-50: 251 247 231;
+        --color-accent-100: 246 237 196;
+        --color-accent-200: 239 221 149;
+        --color-accent-300: 231 203 99;
+        --color-accent-400: 217 181 63;
+        --color-accent-500: 201 162 39;
+        --color-accent-600: 184 145 31;
+        --color-accent-700: 169 133 26;
+        --color-accent-800: 135 104 25;
+        --color-accent-900: 111 86 26;
+        --color-accent-950: 65 49 12;
     }
 
     html {
