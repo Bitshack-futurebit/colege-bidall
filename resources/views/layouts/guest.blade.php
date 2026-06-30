@@ -36,6 +36,22 @@
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Brand palette — generated from config('branding.colors.primary') so the primary-*
+         scale re-themes the auth pages too (the app layout does the same). Without this the
+         guest pages fall back to app.css's default green. --}}
+    @php
+        $brandPrimary = ($whiteLabel ?? null)?->isActive()
+            ? $whiteLabel->primaryColor()
+            : config('branding.colors.primary', '#22c55e');
+    @endphp
+    <style>
+        :root {
+            @foreach(\App\Helpers\ColorHelper::generatePalette($brandPrimary) as $shade => $rgb)
+            --color-primary-{{ $shade }}: {{ $rgb }};
+            @endforeach
+        }
+    </style>
 </head>
 <body class="font-sans antialiased bg-gray-50 dark:bg-gray-900">
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
