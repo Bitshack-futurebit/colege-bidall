@@ -5,7 +5,7 @@
     {{-- ── Presentation slideshow (replaces the map) ──
          Edit the $slides array below to change the deck. Per-slide fields (all optional except title):
            variant   = 'title' | 'closing' | 'cta'  → blue accent slide
-           logo      = true                          → show the ACSA logo (title slide)
+           logo      = true                          → show the SACA logo (title slide)
            eyebrow   = small label above the headline
            title     = the big headline
            body      = supporting sentence
@@ -19,10 +19,10 @@
             [
                 'variant' => 'title',
                 'logo'    => true,
-                'eyebrow' => 'Auctioneering College of SA',
+                'eyebrow' => 'The South African College of Auctioneering',
                 'title'   => 'Bridging Traditional Auctioneering with Online Execution',
                 'body'    => 'A strategic programme proposal',
-                'narration' => 'Auctioneering College of South Africa. Bridging traditional auctioneering with online execution. A strategic programme proposal.',
+                'narration' => 'The South African College of Auctioneering. Bridging traditional auctioneering with online execution. A strategic programme proposal.',
             ],
             [
                 'eyebrow'  => 'The Strategic Opportunity',
@@ -153,7 +153,7 @@
                     preview() {
                         if (!window.speechSynthesis) return;
                         speechSynthesis.cancel();
-                        const u = new SpeechSynthesisUtterance('This is the Auctioneering College of South Africa, where we run live online auctions.');
+                        const u = new SpeechSynthesisUtterance('This is The South African College of Auctioneering, where we run live online auctions.');
                         if (this.voice) u.voice = this.voice;
                         u.pitch = 0.9; u.rate = 0.95;
                         speechSynthesis.speak(u);
